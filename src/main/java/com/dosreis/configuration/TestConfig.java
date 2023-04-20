@@ -1,6 +1,7 @@
 package com.dosreis.configuration;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 		Cliente c2 = new Cliente(null, "Erick");
 		
 		clienteRepo.saveAll(Arrays.asList(c1, c2));
+		
+		List<Cliente> listC = clienteRepo.buscaPorNome("Er");
+		System.out.println(listC);
 	}
 
 }
