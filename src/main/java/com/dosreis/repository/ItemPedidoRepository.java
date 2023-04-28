@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.dosreis.entity.ItemPedido;
 
 @Repository
-public class ItemPedidoRepository{
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer>{
 
 }

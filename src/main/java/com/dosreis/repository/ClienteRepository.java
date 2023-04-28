@@ -15,4 +15,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	@Query(value = "select c from Cliente c where c.nome like %:nome% ")
 	List<Cliente> buscaPorNome( @Param("nome") String nome);
 
+	@Query(" select c from Cliente c left join fetch c.pedidos where c.id = :id  ")
+	Cliente findClienteFecthPedidos( @Param("id") Integer id);
+	
 }
