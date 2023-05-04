@@ -21,5 +21,22 @@ public class ClienteService {
 	public List<Cliente> listarTodos(){
 		return clienteRepo.findAll();
 	}
+
+	public Object findById(Integer id) {
+		return clienteRepo.findById(id);
+	}
 	
+	public void deletar(Integer id) {
+		clienteRepo.deleteById(id);
+	}
+	
+	public Cliente alterar(Integer id, Cliente cliente) {
+		Cliente c = clienteRepo.getReferenceById(id);
+			alterarCliente(c, cliente);
+			return cliente = clienteRepo.save(c);
+	}
+	
+	public void alterarCliente(Cliente c, Cliente cliente) {
+		c.setNome(cliente.getNome());
+	}
 }

@@ -3,7 +3,6 @@ package com.dosreis.configuration;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,16 +30,13 @@ public class TestConfig implements CommandLineRunner {
 		Cliente c2 = new Cliente(null, "Erick");
 		
 		clienteRepo.saveAll(Arrays.asList(c1, c2));
-		
-		//List<Cliente> listC = clienteRepo.buscaPorNome("Er");
+	
 		
 		Pedido p1 = new Pedido(null, c1, LocalDate.now(), new BigDecimal(100));
 		Pedido p2 = new Pedido(null, c1, LocalDate.now(), new BigDecimal(99.80));
 		pedidoRepo.saveAll(Arrays.asList(p1, p2));
 		
-		System.out.println(clienteRepo.findClienteFecthPedidos(1));
 		
-		System.out.println(pedidoRepo.findByIdCliente(c1));
 	}
 
 }
