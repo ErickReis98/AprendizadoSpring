@@ -19,14 +19,24 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	
+
 	@Column(name = "preco_unitario")
 	private BigDecimal preco;
 
 	@OneToMany(mappedBy = "idProduto")
 	private List<ItemPedido> items;
-	
-	
+
+	public Produto() {
+		super();
+	}
+
+	public Produto(Integer id, String descricao, BigDecimal preco) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -55,5 +65,4 @@ public class Produto {
 		return items;
 	}
 
-	
 }

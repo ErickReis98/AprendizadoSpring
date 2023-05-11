@@ -3,6 +3,7 @@ package com.dosreis.entity;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +21,9 @@ public class Cliente {
 	private Integer id;
 	private String nome;
 
+	@Column(name = "cpf", length = 11)
+	private String cpf;
+
 	@OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY)
 	private Set<Pedido> pedidos;
 
@@ -27,10 +31,11 @@ public class Cliente {
 		super();
 	}
 
-	public Cliente(Integer id, String nome) {
+	public Cliente(Integer id, String nome, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.cpf = cpf;
 	}
 
 	public Integer getId() {
@@ -47,6 +52,15 @@ public class Cliente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public void setPedidos(Set<Pedido> pedidos) {
@@ -75,5 +89,4 @@ public class Cliente {
 		return "Cliente [id=" + id + ", nome=" + nome + ", pedidos=" + pedidos + "]";
 	}
 
-	
 }

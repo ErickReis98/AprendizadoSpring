@@ -2,7 +2,6 @@ package com.dosreis.controller;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +36,7 @@ public class ClienteController {
 		return ResponseEntity.ok().body(clienteServ.salvar(cliente));
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/findId/{id}")
 	public ResponseEntity<Object> buscarPorId(@PathVariable Integer id){
 		return ResponseEntity.ok().body(clienteServ.findById(id));
 	}
@@ -51,5 +50,20 @@ public class ClienteController {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Cliente> alterar(@PathVariable Integer id, @RequestBody Cliente cliente){
 		return ResponseEntity.ok().body(clienteServ.alterar(id, cliente));
+	}
+	
+	@GetMapping(value = "/findNome/{nome}")
+	public ResponseEntity<List<Cliente>> buscaPorNome(@PathVariable String nome){
+		return ResponseEntity.ok().body(clienteServ.buscaPorNome(nome));
+	}
+	
+	@GetMapping(value = "/findCpf/{cpf}")
+	public ResponseEntity<Cliente> buscaPorCpf(@PathVariable String cpf){
+		return ResponseEntity.ok().body(clienteServ.buscaPorCpf(cpf));
+	}
+	
+	@GetMapping(value = "/findFiltro")
+	public ResponseEntity<List<Cliente>> buscaPorFiltro(Cliente filtro){
+		return ResponseEntity.ok(clienteServ.buscaPorFiltro(filtro)); 
 	}
 }
