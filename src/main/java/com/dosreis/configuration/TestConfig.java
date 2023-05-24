@@ -42,7 +42,7 @@ public class TestConfig implements CommandLineRunner {
 		pedidoRepo.saveAll(Arrays.asList(p1, p2));
 		
 		Produto pr1 = new Produto(null, "Amendoas", new BigDecimal(12.45));
-		Produto pr2 = new Produto(null, "Balões", new BigDecimal(19.90));
+		Produto pr2 = new Produto(null, "Balões", new BigDecimal(20));
 		produtoRepo.saveAll(Arrays.asList(pr1, pr2));
 	}
 

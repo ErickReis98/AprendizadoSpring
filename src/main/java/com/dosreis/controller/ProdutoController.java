@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,6 +50,11 @@ public class ProdutoController {
 	@GetMapping(value = "/findPreco/min={min}&max={max}")
 	public ResponseEntity<List<Produto>> buscaPorFaixaPreco(@PathVariable Double min, @PathVariable Double max){
 		return ResponseEntity.ok().body(produtoServ.buscaPorFaixaPreco(min, max));
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Produto> alterar(@PathVariable Integer id, @RequestBody Produto produto){
+		return ResponseEntity.ok().body(produtoServ.alterar(produto, id));
 	}
 	
 }

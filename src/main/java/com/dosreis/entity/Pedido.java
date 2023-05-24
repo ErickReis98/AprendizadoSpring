@@ -79,6 +79,11 @@ public class Pedido {
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
+	
+	
+	public void setItemPedidos(List<ItemPedido> itemPedidos) {
+		this.itemPedidos = itemPedidos;
+	}
 
 	@Override
 	public String toString() {
