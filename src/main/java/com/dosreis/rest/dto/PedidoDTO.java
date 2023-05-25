@@ -1,4 +1,4 @@
-package com.dosreis.dto;
+package com.dosreis.rest.dto;
 
 import java.math.BigDecimal;
 import java.util.List;

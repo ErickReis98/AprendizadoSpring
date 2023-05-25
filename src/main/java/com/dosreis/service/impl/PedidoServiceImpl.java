@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dosreis.dto.ItemPedidoDTO;
-import com.dosreis.dto.PedidoDTO;
 import com.dosreis.entity.Cliente;
 import com.dosreis.entity.ItemPedido;
 import com.dosreis.entity.Pedido;
@@ -18,6 +16,8 @@ import com.dosreis.repository.ClienteRepository;
 import com.dosreis.repository.ItemPedidoRepository;
 import com.dosreis.repository.PedidoRepository;
 import com.dosreis.repository.ProdutoRepository;
+import com.dosreis.rest.dto.ItemPedidoDTO;
+import com.dosreis.rest.dto.PedidoDTO;
 import com.dosreis.service.PedidoService;
 
 import jakarta.transaction.Transactional;

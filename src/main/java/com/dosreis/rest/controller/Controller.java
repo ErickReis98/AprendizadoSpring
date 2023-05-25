@@ -1,4 +1,4 @@
-package com.dosreis.controller;
+package com.dosreis.rest.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

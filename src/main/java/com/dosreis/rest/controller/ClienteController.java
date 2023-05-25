@@ -1,4 +1,4 @@
-package com.dosreis.controller;
+package com.dosreis.rest.controller;
 
 import java.util.List;
 

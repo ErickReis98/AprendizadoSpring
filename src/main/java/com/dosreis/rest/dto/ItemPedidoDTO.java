@@ -1,4 +1,4 @@
-package com.dosreis.dto;
+package com.dosreis.rest.dto;
 
 public class ItemPedidoDTO {
 
