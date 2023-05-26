@@ -5,12 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.ExampleMatcher.StringMatcher;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.dosreis.entity.Cliente;
-import com.dosreis.repository.ClienteRepository;
+import com.dosreis.domain.entity.Cliente;
+import com.dosreis.domain.repository.ClienteRepository;
 
 @Service
 public class ClienteService {

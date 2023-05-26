@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dosreis.entity.Produto;
+import com.dosreis.domain.entity.Produto;
 import com.dosreis.service.ProdutoService;
 
 @RestController

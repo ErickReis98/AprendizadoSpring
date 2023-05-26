@@ -3,21 +3,6 @@ package com.dosreis.rest.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
-/*
-
-  {
-    "cliente" : 1,
-    "total" : 100,
-    "Items" : [
-        {
-            "produto": 1,
-            "quantidade": 10
-        }
-    ]
-
-}
- 
- */
 
 public class PedidoDTO {
 

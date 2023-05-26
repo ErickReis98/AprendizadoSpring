@@ -1,4 +1,4 @@
-package com.dosreis.entity;
+package com.dosreis.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

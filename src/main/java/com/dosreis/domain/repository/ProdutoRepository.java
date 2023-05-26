@@ -1,4 +1,4 @@
-package com.dosreis.repository;
+package com.dosreis.domain.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.dosreis.entity.Produto;
+import com.dosreis.domain.entity.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {

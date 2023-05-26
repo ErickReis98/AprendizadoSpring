@@ -9,12 +9,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.dosreis.entity.Cliente;
-import com.dosreis.entity.Pedido;
-import com.dosreis.entity.Produto;
-import com.dosreis.repository.ClienteRepository;
-import com.dosreis.repository.PedidoRepository;
-import com.dosreis.repository.ProdutoRepository;
+import com.dosreis.domain.entity.Cliente;
+import com.dosreis.domain.entity.Pedido;
+import com.dosreis.domain.entity.Produto;
+import com.dosreis.domain.repository.ClienteRepository;
+import com.dosreis.domain.repository.PedidoRepository;
+import com.dosreis.domain.repository.ProdutoRepository;
 
 @Configuration
 @Profile("developement")

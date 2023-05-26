@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dosreis.entity.Produto;
-import com.dosreis.repository.ProdutoRepository;
+import com.dosreis.domain.entity.Produto;
+import com.dosreis.domain.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {

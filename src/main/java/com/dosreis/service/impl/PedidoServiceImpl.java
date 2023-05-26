@@ -2,20 +2,22 @@ package com.dosreis.service.impl;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dosreis.entity.Cliente;
-import com.dosreis.entity.ItemPedido;
-import com.dosreis.entity.Pedido;
-import com.dosreis.entity.Produto;
+import com.dosreis.domain.entity.Cliente;
+import com.dosreis.domain.entity.ItemPedido;
+import com.dosreis.domain.entity.Pedido;
+import com.dosreis.domain.entity.Produto;
+import com.dosreis.domain.enums.StatusPedido;
+import com.dosreis.domain.repository.ClienteRepository;
+import com.dosreis.domain.repository.ItemPedidoRepository;
+import com.dosreis.domain.repository.PedidoRepository;
+import com.dosreis.domain.repository.ProdutoRepository;
 import com.dosreis.exception.RegraNegocioException;
-import com.dosreis.repository.ClienteRepository;
-import com.dosreis.repository.ItemPedidoRepository;
-import com.dosreis.repository.PedidoRepository;
-import com.dosreis.repository.ProdutoRepository;
 import com.dosreis.rest.dto.ItemPedidoDTO;
 import com.dosreis.rest.dto.PedidoDTO;
 import com.dosreis.service.PedidoService;
@@ -27,7 +29,7 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepo;
-	
+
 	@Autowired
 	private ClienteRepository clienteRepo;
 
@@ -39,20 +41,21 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Override
 	@Transactional
-	public Pedido salvar(PedidoDTO dto) {
-		Integer idCliente = dto.getCliente();
+	public Pedido salvar(PedidoDTO pedidoDTO) {
+		Integer idCliente = pedidoDTO.getCliente();
 		Cliente cliente = clienteRepo.findById(idCliente)
 				.orElseThrow(() -> new RegraNegocioException("Código de cliente invalido."));
 
 		Pedido pedido = new Pedido();
-		pedido.setTotal(dto.getTotal());
+		pedido.setTotal(pedidoDTO.getTotal());
 		pedido.setData_pedido(LocalDate.now());
 		pedido.setIdCliente(cliente);
+		pedido.setStatus(StatusPedido.REALIZADO);
 		pedidoRepo.save(pedido);
-		
-		List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
+
+		List<ItemPedido> itemsPedido = converterItems(pedido, pedidoDTO.getItems());
 		itemPedidoRepo.saveAll(itemsPedido);
-		pedido.setItemPedidos(itemsPedido);
+		pedido.setItens(itemsPedido);
 		return pedido;
 	}
 
@@ -73,6 +76,11 @@ public class PedidoServiceImpl implements PedidoService {
 			return itemPedido;
 
 		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<Pedido> obterPedidoCompleto(Integer id) {
+		return pedidoRepo.findByIdFecthItens(id);
 	}
 
 }

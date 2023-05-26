@@ -1,4 +1,4 @@
-package com.dosreis.entity;
+package com.dosreis.domain.entity;
 
 import java.util.Objects;
 import java.util.Set;
