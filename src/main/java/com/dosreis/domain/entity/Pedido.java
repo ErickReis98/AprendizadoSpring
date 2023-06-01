@@ -56,6 +56,14 @@ public class Pedido {
 		this.total = total;
 	}
 
+	public Pedido(Integer id,StatusPedido status, Cliente idCliente, LocalDate data_pedido, BigDecimal total) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.idCliente = idCliente;
+		this.data_pedido = data_pedido;
+		this.total = total;
+	}
 	
 
 }

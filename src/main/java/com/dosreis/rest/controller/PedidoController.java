@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.dosreis.domain.entity.ItemPedido;
 import com.dosreis.domain.entity.Pedido;
+import com.dosreis.domain.enums.StatusPedido;
+import com.dosreis.rest.dto.AtualizacaoStatusPedidoDTO;
 import com.dosreis.rest.dto.InformacaoItemPedidoDTO;
 import com.dosreis.rest.dto.InformacoesPedidoDTO;
 import com.dosreis.rest.dto.PedidoDTO;
@@ -70,5 +73,12 @@ public class PedidoController {
 				.quantidade(item.getQuantidade())
 				.build()
 		).collect(Collectors.toList());
+	}
+	
+	@PatchMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto) {
+		String novoStatus = dto.getNovoStatus();
+		pedidoServ.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 	}
 }

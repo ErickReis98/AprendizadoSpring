@@ -17,6 +17,7 @@ import com.dosreis.domain.repository.ClienteRepository;
 import com.dosreis.domain.repository.ItemPedidoRepository;
 import com.dosreis.domain.repository.PedidoRepository;
 import com.dosreis.domain.repository.ProdutoRepository;
+import com.dosreis.exception.PedidoNaoEncontradoException;
 import com.dosreis.exception.RegraNegocioException;
 import com.dosreis.rest.dto.ItemPedidoDTO;
 import com.dosreis.rest.dto.PedidoDTO;
@@ -81,6 +82,16 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	public Optional<Pedido> obterPedidoCompleto(Integer id) {
 		return pedidoRepo.findByIdFecthItens(id);
+	}
+
+	@Override
+	@Transactional
+	public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+		pedidoRepo.findById(id).map(pedido -> {
+			pedido.setStatus(statusPedido);
+			return pedidoRepo.save(pedido);
+		}).orElseThrow(() -> new PedidoNaoEncontradoException() );
+
 	}
 
 }
