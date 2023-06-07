@@ -68,9 +68,10 @@ public class PedidoController {
 		
 		return itens.stream().map(item -> InformacaoItemPedidoDTO
 				.builder()
-				.descricaoProduto(item.getIdProduto().getDescricao())
+				.nomeProduto(item.getIdProduto().getNomeProduto())
 				.precoUnitario(item.getIdProduto().getPreco())
 				.quantidade(item.getQuantidade())
+				.subTotal(item.getSubTotal())
 				.build()
 		).collect(Collectors.toList());
 	}

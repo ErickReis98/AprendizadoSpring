@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dosreis.domain.entity.Produto;
 import com.dosreis.service.ProdutoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/produto")
 public class ProdutoController {
@@ -27,7 +29,7 @@ public class ProdutoController {
 	
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public ResponseEntity<Produto> salvar(@RequestBody Produto produto){
+	public ResponseEntity<Produto> salvar(@Valid @RequestBody Produto produto){
 		return ResponseEntity.ok().body(produtoServ.salvar(produto));
 	}
 	
@@ -53,7 +55,7 @@ public class ProdutoController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Produto> alterar(@PathVariable Integer id, @RequestBody Produto produto){
+	public ResponseEntity<Produto> alterar(@Valid @PathVariable Integer id, @RequestBody Produto produto){
 		return ResponseEntity.ok().body(produtoServ.alterar(produto, id));
 	}
 	

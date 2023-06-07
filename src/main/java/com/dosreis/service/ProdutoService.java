@@ -46,7 +46,7 @@ public class ProdutoService {
 	}
 	
 	public void alterarProduto(Produto p, Produto produto) {
-		p.setDescricao(produto.getDescricao());
+		p.setNomeProduto(produto.getNomeProduto());
 		p.setPreco(produto.getPreco());
 	}
 	

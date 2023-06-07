@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class InformacoesPedidoDTO {
@@ -22,6 +22,69 @@ public class InformacoesPedidoDTO {
 	private String status;
 	private List<InformacaoItemPedidoDTO> items;
 
-	
+	public BigDecimal totalPedido() {
+		double soma = 0;
+		for(InformacaoItemPedidoDTO x : items) {
+			 soma = soma + x.getSubTotal();
+		}
+		return new BigDecimal(soma);
+	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public BigDecimal getTotal() {
+		return totalPedido();
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public String getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(String dataPedido) {
+		this.dataPedido = dataPedido;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public List<InformacaoItemPedidoDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<InformacaoItemPedidoDTO> items) {
+		this.items = items;
+	}
+
+	
 }

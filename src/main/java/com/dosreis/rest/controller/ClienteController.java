@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dosreis.domain.entity.Cliente;
 import com.dosreis.service.ClienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -32,7 +34,7 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> salvar(@Valid @RequestBody Cliente cliente){
 		return ResponseEntity.ok().body(clienteServ.salvar(cliente));
 	}
 	
@@ -48,7 +50,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cliente> alterar(@PathVariable Integer id, @RequestBody Cliente cliente){
+	public ResponseEntity<Cliente> alterar(@Valid @PathVariable Integer id, @RequestBody Cliente cliente){
 		return ResponseEntity.ok().body(clienteServ.alterar(id, cliente));
 	}
 	

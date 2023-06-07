@@ -7,9 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_item_pedido")
+@Getter
+@Setter
 public class ItemPedido {
 
 	@Id
@@ -26,36 +30,8 @@ public class ItemPedido {
 
 	private Integer quantidade;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Pedido getIdPedido() {
-		return idPedido;
-	}
-
-	public void setIdPedido(Pedido idPedido) {
-		this.idPedido = idPedido;
-	}
-
-	public Produto getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(Produto idProduto) {
-		this.idProduto = idProduto;
-	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
+	private Double subTotal;
+	
+	
 
 }

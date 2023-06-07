@@ -3,6 +3,8 @@ package com.dosreis.domain.entity;
 import java.util.Objects;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_cliente")
@@ -19,9 +22,13 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank(message = "Campo nome é obrigatório")
 	private String nome;
 
 	@Column(name = "cpf", length = 11)
+	@NotBlank(message = "Campo CPF é obrigatório")
+	@CPF(message = "Informe um CPF válido.")
 	private String cpf;
 
 	@OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY)
