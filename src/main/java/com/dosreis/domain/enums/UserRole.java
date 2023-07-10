@@ -2,9 +2,9 @@ package com.dosreis.domain.enums;
 
 public enum UserRole {
     ADMIN("admin"),
-    USER("usuario");
-	
-	private String role;
+    USER("user");
+
+    private String role;
 
     UserRole(String role){
         this.role = role;

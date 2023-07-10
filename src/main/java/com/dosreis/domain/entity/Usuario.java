@@ -16,18 +16,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Entity
+@Entity(name = "tb_usuario")
 @Table(name = "tb_usuario")
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 
 	@Column(nullable = false, unique = true)

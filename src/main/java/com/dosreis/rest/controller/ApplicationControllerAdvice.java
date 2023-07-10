@@ -1,4 +1,4 @@
-/*package com.dosreis.rest.controller;
+package com.dosreis.rest.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,4 +41,3 @@ public class ApplicationControllerAdvice {
 		return new ApiErrors(errors);
 	}
 }
-*/

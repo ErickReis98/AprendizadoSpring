@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dosreis.domain.entity.Usuario;
 import com.dosreis.rest.dto.AuthenticationDTO;
-import com.dosreis.rest.dto.ResgisterDTO;
+import com.dosreis.rest.dto.LoginResponseDTO;
+import com.dosreis.rest.dto.RegisterDTO;
 import com.dosreis.service.impl.UsuarioService;
+import com.dosreis.service.token.TokenService;
 
 import jakarta.validation.Valid;
 
@@ -28,18 +30,21 @@ public class AuthenticationController {
 	@Autowired
 	private UsuarioService usuarioServ;
 	
+	@Autowired
+	private TokenService tokenService;
+	
 	@PostMapping("/login")
 	public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
 		var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
 		var auth = this.authManager.authenticate(usernamePassword);
 		
-		
-		return ResponseEntity.ok().build();
+		var token = tokenService.generateToken((Usuario) auth.getPrincipal());
+		return ResponseEntity.ok(new LoginResponseDTO(token));
 		
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity registrar(@Valid @RequestBody ResgisterDTO data) {
+	public ResponseEntity registrar(@Valid @RequestBody RegisterDTO data) {
 		if(this.usuarioServ.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 		
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());

@@ -1,4 +1,4 @@
-/*package com.dosreis.rest;
+package com.dosreis.rest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,4 +24,3 @@ public class ApiErrors {
 	
 
 }
-*/
