@@ -7,8 +7,10 @@ import com.dosreis.domain.enums.StatusPedido;
 import com.dosreis.rest.dto.PedidoDTO;
 
 public interface PedidoService {
+	
 	Pedido salvar(PedidoDTO dto);
 	
 	Optional<Pedido> obterPedidoCompleto(Integer id);
+	
 	void atualizaStatus(Integer id, StatusPedido statusPedido);
 }

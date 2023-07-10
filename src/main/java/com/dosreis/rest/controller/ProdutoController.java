@@ -34,6 +34,7 @@ public class ProdutoController {
 	}
 	
 	@GetMapping
+	// @PreAuthorize(value = "")
 	public ResponseEntity<List<Produto>> listarTodos(){
 		return ResponseEntity.ok().body(produtoServ.listarTodos());
 	}

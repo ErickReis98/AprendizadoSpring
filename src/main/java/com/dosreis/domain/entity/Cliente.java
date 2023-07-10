@@ -23,12 +23,12 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Campo nome é obrigatório")
+	@NotBlank(message = "{campo.nome.obrigatorio}")
 	private String nome;
 
 	@Column(name = "cpf", length = 11)
-	@NotBlank(message = "Campo CPF é obrigatório")
-	@CPF(message = "Informe um CPF válido.")
+	@NotBlank(message = "{campo.cpf.obrigatorio}o")
+	@CPF(message = "{campo.cpf.invalido}")
 	private String cpf;
 
 	@OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY)

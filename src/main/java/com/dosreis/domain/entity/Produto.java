@@ -27,11 +27,11 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Campo nome do produto é obrigatório.")
+	@NotBlank(message = "{campo.nomeProduto.obrigatorio}")
 	private String nomeProduto;
 
 	@Column(name = "preco_unitario")
-	@NotNull(message = "Campo preço é obrigatório.")
+	@NotNull(message = "{campo.preco.obrigatorio}")
 	private BigDecimal preco;
 
 	@JsonIgnore

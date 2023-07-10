@@ -1,11 +1,11 @@
 package com.dosreis.rest.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
@@ -27,7 +27,7 @@ public class InformacoesPedidoDTO {
 		for(InformacaoItemPedidoDTO x : items) {
 			 soma = soma + x.getSubTotal();
 		}
-		return new BigDecimal(soma);
+		return new BigDecimal(soma).setScale(2, RoundingMode.HALF_EVEN);
 	}
 
 	public Integer getId() {

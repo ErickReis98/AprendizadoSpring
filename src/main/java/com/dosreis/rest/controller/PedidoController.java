@@ -27,6 +27,8 @@ import com.dosreis.rest.dto.InformacoesPedidoDTO;
 import com.dosreis.rest.dto.PedidoDTO;
 import com.dosreis.service.PedidoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/pedido")
 public class PedidoController {
@@ -36,7 +38,7 @@ public class PedidoController {
 	
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@PostMapping
-	public Integer salvar(@RequestBody PedidoDTO dto) {
+	public Integer salvar(@Valid @RequestBody PedidoDTO dto) {
 		Pedido pedido = pedidoServ.salvar(dto);
         return pedido.getId();
 	}
@@ -79,7 +81,7 @@ public class PedidoController {
 	@PatchMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void updateStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDTO dto) {
-		String novoStatus = dto.getNovoStatus();
+		String novoStatus = dto.novoStatus();
 		pedidoServ.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 	}
 }

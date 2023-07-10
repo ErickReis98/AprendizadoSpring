@@ -1,10 +1,5 @@
 package com.dosreis.rest.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class AtualizacaoStatusPedidoDTO {
-	private String novoStatus;
+public record AtualizacaoStatusPedidoDTO (String novoStatus){
+	
 }
