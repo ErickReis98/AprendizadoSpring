@@ -1,10 +1,12 @@
 package com.dosreis.domain.entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.dosreis.domain.enums.StatusPedido;
+import com.dosreis.rest.dto.InformacaoItemPedidoDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -92,7 +94,7 @@ public class Pedido {
 	}
 
 	public BigDecimal getTotal() {
-		return total;
+		return totalPedido();
 	}
 
 	public void setTotal(BigDecimal total) {
@@ -115,4 +117,11 @@ public class Pedido {
 		this.itens = itens;
 	}
 
+	public BigDecimal totalPedido() {
+		double soma = 0;
+		for(ItemPedido x : itens) {
+			 soma = soma + x.getSubTotal();
+		}
+		return new BigDecimal(soma).setScale(2, RoundingMode.HALF_EVEN);
+	}
 }

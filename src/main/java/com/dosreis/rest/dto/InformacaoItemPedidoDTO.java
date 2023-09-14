@@ -1,7 +1,5 @@
 package com.dosreis.rest.dto;
 
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -13,12 +11,9 @@ public class InformacaoItemPedidoDTO {
 
 	private String nomeProduto;
 	private Integer quantidade;
-	private BigDecimal precoUnitario;
+	private Double precoUnitario;
 	private Double subTotal;
 	
-	public Double subTotall() {
-		return quantidade * precoUnitario.doubleValue();
-	}
 
 	public String getNomeProduto() {
 		return nomeProduto;
@@ -36,16 +31,16 @@ public class InformacaoItemPedidoDTO {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getPrecoUnitario() {
+	public Double getPrecoUnitario() {
 		return precoUnitario;
 	}
 
-	public void setPrecoUnitario(BigDecimal precoUnitario) {
+	public void setPrecoUnitario(Double precoUnitario) {
 		this.precoUnitario = precoUnitario;
 	}
 
 	public Double getSubTotal() {
-		return subTotall();
+		return quantidade * precoUnitario.doubleValue();
 	}
 
 	public void setSubTotal(Double subTotal) {

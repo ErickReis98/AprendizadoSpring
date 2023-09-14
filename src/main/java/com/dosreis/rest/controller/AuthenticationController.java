@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dosreis.domain.entity.PerfilUsuario;
 import com.dosreis.domain.entity.Usuario;
 import com.dosreis.rest.dto.AuthenticationDTO;
 import com.dosreis.rest.dto.LoginResponseDTO;
+import com.dosreis.rest.dto.PerfilUsuarioDTO;
 import com.dosreis.rest.dto.RegisterDTO;
+import com.dosreis.rest.dto.RegistroComPerfil;
 import com.dosreis.service.impl.UsuarioService;
 import com.dosreis.service.token.TokenService;
 
@@ -44,8 +47,8 @@ public class AuthenticationController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity registrar(@Valid @RequestBody RegisterDTO data) {
-		if(this.usuarioServ.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+	public ResponseEntity registrarSemPerfil(@Valid @RequestBody RegisterDTO data) {
+		if( usuarioServ.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 		
 		String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
 		Usuario newUser = new Usuario(data.login(), encryptedPassword, data.role());
@@ -53,6 +56,21 @@ public class AuthenticationController {
 		
 		return ResponseEntity .ok().build();
 		
+	}
+	
+	@PostMapping("/registerPerfil")
+	public ResponseEntity<Usuario> registrarComPerfil(@Valid @RequestBody RegistroComPerfil data) {
+		
+		if(usuarioServ.findByLogin(data.uDTO().login()) != null) 
+			return ResponseEntity.badRequest().build();
+		
+		PerfilUsuario pU = new PerfilUsuario(null, data.puDTO().nome(), data.puDTO().email(), data.puDTO().cpf(), data.puDTO().genero(), data.puDTO().ddd(), data.puDTO().telefone());
+		String encryptedPassword = new BCryptPasswordEncoder().encode(data.uDTO().password());
+		
+		Usuario newUser = new Usuario(data.uDTO().login(), encryptedPassword, data.uDTO().role(), pU);
+		this.usuarioServ.salvar(newUser);
+		
+		return ResponseEntity .ok().build();
 	}
 	
 	@GetMapping

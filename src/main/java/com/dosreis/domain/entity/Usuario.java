@@ -10,11 +10,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.dosreis.domain.enums.UserRole;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,7 +30,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "userId")
 public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +48,9 @@ public class Usuario implements UserDetails, Serializable {
 	@Column
 	private UserRole role;
 
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "perfil_usuario_id")
+	private PerfilUsuario perfilUsuario;
 	
 	
 	 public Usuario(Integer userId, String login, String password) {
@@ -63,7 +69,13 @@ public class Usuario implements UserDetails, Serializable {
 		this.role = role;
 	}
 
-
+	public Usuario(String login, String password, UserRole role, PerfilUsuario perfilUsuario) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.role = role;
+		this.perfilUsuario = perfilUsuario;
+	}
 
 	@Override
 	    public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -121,6 +133,10 @@ public class Usuario implements UserDetails, Serializable {
 		public String toString() {
 			return "Username: " + login + ",\nPassword: " + password;
 		}
+
+
+
+		
 	    
 	    
 	}

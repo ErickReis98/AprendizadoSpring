@@ -1,6 +1,5 @@
 package com.dosreis.domain.entity;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,13 +13,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tb_produto")
-@Getter
-@Setter
+
 public class Produto {
 
 	@Id
@@ -32,7 +28,7 @@ public class Produto {
 
 	@Column(name = "preco_unitario")
 	@NotNull(message = "{campo.preco.obrigatorio}")
-	private BigDecimal preco;
+	private Double preco;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "idProduto")
@@ -42,13 +38,46 @@ public class Produto {
 		super();
 	}
 
-	public Produto(Integer id, String descricao, BigDecimal preco) {
+	public Produto(Integer id, String descricao, Double preco) {
 		super();
 		this.id = id;
 		this.nomeProduto = descricao;
 		this.preco = preco;
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public List<ItemPedido> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemPedido> items) {
+		this.items = items;
+	}
+
+
+	
 
 }

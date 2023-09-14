@@ -9,8 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 public class PedidoDTO {
 
 	@NotNull(message = "{campo.codigo-cliente.obrigatorio}")
@@ -29,6 +28,30 @@ public class PedidoDTO {
 		super();
 		this.cliente = cliente;
 		this.total = total;
+		this.items = items;
+	}
+
+	public Integer getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Integer cliente) {
+		this.cliente = cliente;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public List<ItemPedidoDTO> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemPedidoDTO> items) {
 		this.items = items;
 	}
 	

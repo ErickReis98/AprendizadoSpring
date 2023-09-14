@@ -30,9 +30,11 @@ public class SecurityConfig {
 			.authorizeHttpRequests(authorize -> authorize
 			.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 			.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+			.requestMatchers(HttpMethod.POST, "/auth/registerPerfil").permitAll()
 			.requestMatchers(HttpMethod.GET, "/auth").permitAll()
 			.requestMatchers(HttpMethod.POST, "/cliente").hasRole("ADMIN")
 			.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+			.requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
 			.anyRequest().authenticated()
 			)
 			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
@@ -53,7 +55,8 @@ public class SecurityConfig {
     	return auth.getAuthenticationManager();
     }
     
-    /* @Bean
+    /*
+     @Bean
     public UserDetailsService userDetailsService() {
     UserDetails user =
          User.builder()
@@ -68,4 +71,3 @@ public class SecurityConfig {
     }*/
 	
 }
-

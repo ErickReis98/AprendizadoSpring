@@ -44,19 +44,17 @@ public class PedidoServiceImpl implements PedidoService {
 	@Transactional
 	public Pedido salvar(PedidoDTO pedidoDTO) {
 		Integer idCliente = pedidoDTO.getCliente();
+		
 		Cliente cliente = clienteRepo.findById(idCliente)
 				.orElseThrow(() -> new RegraNegocioException("Código de cliente invalido."));
+		
+		Pedido pedido = new Pedido(null, StatusPedido.REALIZADO, cliente, LocalDate.now(), null);
 
-		Pedido pedido = new Pedido();
-		pedido.setTotal(pedidoDTO.getTotal());
-		pedido.setData_pedido(LocalDate.now());
-		pedido.setIdCliente(cliente);
-		pedido.setStatus(StatusPedido.REALIZADO);
 		pedidoRepo.save(pedido);
-
 		List<ItemPedido> itemsPedido = converterItems(pedido, pedidoDTO.getItems());
 		itemPedidoRepo.saveAll(itemsPedido);
 		pedido.setItens(itemsPedido);
+		pedido.setTotal(pedido.getTotal());
 		return pedido;
 	}
 
