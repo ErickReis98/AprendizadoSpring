@@ -40,7 +40,7 @@ public class Usuario implements UserDetails, Serializable {
 	private Integer userId;
 
 	@Column(nullable = false, unique = true)
-	private String login;
+	private String username;
 
 	@Column(nullable = false)
 	private String password;
@@ -56,7 +56,7 @@ public class Usuario implements UserDetails, Serializable {
 	 public Usuario(Integer userId, String login, String password) {
 		super();
 		this.userId = userId;
-		this.login = login;
+		this.username = login;
 		this.password = password;
 	}
 
@@ -64,14 +64,14 @@ public class Usuario implements UserDetails, Serializable {
 
 	public Usuario(String login, String password, UserRole role) {
 		super();
-		this.login = login;
+		this.username = login;
 		this.password = password;
 		this.role = role;
 	}
 
 	public Usuario(String login, String password, UserRole role, PerfilUsuario perfilUsuario) {
 		super();
-		this.login = login;
+		this.username = login;
 		this.password = password;
 		this.role = role;
 		this.perfilUsuario = perfilUsuario;
@@ -90,7 +90,7 @@ public class Usuario implements UserDetails, Serializable {
 
 	    @Override
 	    public String getUsername() {
-	        return this.login;
+	        return this.username;
 	    }
 
 	    @Override
@@ -122,7 +122,7 @@ public class Usuario implements UserDetails, Serializable {
 	    }
 
 	    public void setUsername(String username) {
-	        this.login = username;
+	        this.username = username;
 	    }
 
 	    public void setPassword(String password) {
@@ -131,7 +131,7 @@ public class Usuario implements UserDetails, Serializable {
 
 		@Override
 		public String toString() {
-			return "Username: " + login + ",\nPassword: " + password;
+			return "Username: " + username + ",\nPassword: " + password;
 		}
 
 

@@ -22,7 +22,7 @@ public class UsuarioService {
 	}
 
 	public UserDetails findByLogin(String login) {
-		return usuarioRepo.findByLogin(login);
+		return usuarioRepo.findByUsername(login);
 	}
 
 }
