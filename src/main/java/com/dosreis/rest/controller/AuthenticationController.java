@@ -78,7 +78,7 @@ public class AuthenticationController {
 
 		Usuario newUser = new Usuario(data.uDTO().username(), encryptedPassword, data.uDTO().role(), pU);
 		this.usuarioServ.salvar(newUser);
-
+ 
 		return ResponseEntity.ok().build();
 	}
 

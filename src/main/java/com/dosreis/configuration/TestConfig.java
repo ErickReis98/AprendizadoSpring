@@ -56,7 +56,7 @@ public class TestConfig implements CommandLineRunner {
 		Produto pr2 = new Produto(null, "Balões", 20.0);
 		produtoRepo.saveAll(Arrays.asList(pr1, pr2));
 		
-		PerfilUsuario pu1 = new PerfilUsuario(null, "Sarah", "Sarah123@gmail.com", "46090833886", "Masculino", "11", "11965869482");
+		PerfilUsuario pu1 = new PerfilUsuario(null, "Sarah", "sarah123@gmail.com", "46090833886", "Masculino", "11", "11965869482");
 		Usuario u1 = new Usuario("Usuario", new BCryptPasswordEncoder().encode("user123"),UserRole.ADMIN, pu1);
 		
 		PerfilUsuario pu2 = new PerfilUsuario(null, "Erick", "erick123@gmail.com", "47324239811", "Masculino", "11", "11965869482");
