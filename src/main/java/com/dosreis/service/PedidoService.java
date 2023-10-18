@@ -1,5 +1,6 @@
 package com.dosreis.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.dosreis.domain.entity.Pedido;
@@ -13,4 +14,5 @@ public interface PedidoService {
 	Optional<Pedido> obterPedidoCompleto(Integer id);
 	
 	void atualizaStatus(Integer id, StatusPedido statusPedido);
+	
 }

@@ -16,14 +16,14 @@ public class InformacoesPedidoDTO {
 	private Integer id;
 	private String cpf;
 	private String nomeCliente;
-	private BigDecimal total;
+	private List<InformacaoItemPedidoDTO> listaItens;
 	private String dataPedido;
 	private String status;
-	private List<InformacaoItemPedidoDTO> items;
-
+	private BigDecimal total;
+	
 	public BigDecimal totalPedido() {
 		double soma = 0;
-		for(InformacaoItemPedidoDTO x : items) {
+		for(InformacaoItemPedidoDTO x : listaItens) {
 			 soma = soma + x.getSubTotal();
 		}
 		return new BigDecimal(soma).setScale(2, RoundingMode.HALF_EVEN);
@@ -78,11 +78,11 @@ public class InformacoesPedidoDTO {
 	}
 
 	public List<InformacaoItemPedidoDTO> getItems() {
-		return items;
+		return listaItens;
 	}
 
 	public void setItems(List<InformacaoItemPedidoDTO> items) {
-		this.items = items;
+		this.listaItens = items;
 	}
 
 	

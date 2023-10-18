@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class InformacaoItemPedidoDTO {
 
 	private String nomeProduto;
-	private Integer quantidade;
+	private int quantidade;
 	private Double precoUnitario;
 	private Double subTotal;
 	

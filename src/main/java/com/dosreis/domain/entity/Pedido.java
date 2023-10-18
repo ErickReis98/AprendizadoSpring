@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.dosreis.domain.enums.StatusPedido;
-import com.dosreis.rest.dto.InformacaoItemPedidoDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +28,7 @@ import lombok.NoArgsConstructor;
 public class Pedido {
 
 	@Id
+	@Column(name = "id_pedido")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -58,7 +58,7 @@ public class Pedido {
 		this.total = total;
 	}
 
-	public Pedido(Integer id, Cliente idCliente, LocalDate data_pedido, BigDecimal total, StatusPedido status,
+	public Pedido(Integer id, StatusPedido status, Cliente idCliente, LocalDate data_pedido, BigDecimal total, 
 			List<ItemPedido> itens) {
 		super();
 		this.id = id;
@@ -124,4 +124,12 @@ public class Pedido {
 		}
 		return new BigDecimal(soma).setScale(2, RoundingMode.HALF_EVEN);
 	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", idCliente=" + idCliente + ", data_pedido=" + data_pedido + ", total=" + total
+				+ ", status=" + status + ", itens=" + itens + ", totalPedido()=" + totalPedido() + "]";
+	}
+	
+	
 }

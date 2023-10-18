@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dosreis.domain.entity.Cliente;
 import com.dosreis.domain.repository.ClienteRepository;
+import com.dosreis.rest.dto.ClientecomPedidosDTO;
 
 @Service
 public class ClienteService {
@@ -67,5 +68,10 @@ public class ClienteService {
 		Example<Cliente> example = Example.of(filtro, matcher);
 		List<Cliente> lista = clienteRepo.findAll(example);
 		return lista;
+	}
+	
+	public List<ClientecomPedidosDTO> buscarPedidos(Integer id){
+		verificaId(id);
+		return clienteRepo.buscarPedidos(id);
 	}
 }

@@ -43,6 +43,11 @@ public class PedidoController {
         return pedido.getId();
 	}
 	
+	public Integer salvarManualmente(PedidoDTO dto) {
+		Pedido pedido = pedidoServ.salvar(dto);
+        return pedido.getId();
+	}
+	
 	@GetMapping(value = "/{id}")
 	public InformacoesPedidoDTO getById(@PathVariable Integer id) {
 		return pedidoServ.obterPedidoCompleto(id)
@@ -59,7 +64,7 @@ public class PedidoController {
 		.nomeCliente(pedido.getIdCliente().getNome())
 		.total(pedido.getTotal())
 		.status(pedido.getStatus().name())
-		.items(converter(pedido.getItens()))
+		.listaItens(converter(pedido.getItens()))
 		.build();
 	}
 	
@@ -84,4 +89,5 @@ public class PedidoController {
 		String novoStatus = dto.novoStatus();
 		pedidoServ.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 	}
+	
 }

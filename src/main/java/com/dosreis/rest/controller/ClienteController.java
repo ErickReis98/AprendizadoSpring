@@ -1,6 +1,7 @@
 package com.dosreis.rest.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dosreis.domain.entity.Cliente;
+import com.dosreis.domain.entity.Pedido;
+import com.dosreis.rest.dto.ClientecomPedidosDTO;
 import com.dosreis.service.ClienteService;
 
 import jakarta.validation.Valid;
@@ -71,5 +74,14 @@ public class ClienteController {
 	@GetMapping(value = "/findFiltro")
 	public ResponseEntity<List<Cliente>> buscaPorFiltro(Cliente filtro){
 		return ResponseEntity.ok(clienteServ.buscaPorFiltro(filtro)); 
+	}
+	
+	
+	
+	// Rota para buscar os pedidos de um determinado cliente
+	@GetMapping(value = "/buscarPedidos/{id}")
+	public ResponseEntity<List<ClientecomPedidosDTO>> buscarPedidos(@PathVariable Integer id){
+		return ResponseEntity.ok(clienteServ.buscarPedidos(id));
+		
 	}
 }

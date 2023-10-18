@@ -51,19 +51,19 @@ public class PedidoServiceImpl implements PedidoService {
 		Pedido pedido = new Pedido(null, StatusPedido.REALIZADO, cliente, LocalDate.now(), null);
 
 		pedidoRepo.save(pedido);
-		List<ItemPedido> itemsPedido = converterItems(pedido, pedidoDTO.getItems());
+		List<ItemPedido> itemsPedido = converterItems(pedido, pedidoDTO.getListaItens());
 		itemPedidoRepo.saveAll(itemsPedido);
 		pedido.setItens(itemsPedido);
 		pedido.setTotal(pedido.getTotal());
 		return pedido;
 	}
 
-	private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items) {
-		if (items.isEmpty()) {
+	private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> listaItens) {
+		if (listaItens.isEmpty()) {
 			throw new RegraNegocioException("Não é possivel realizar um pedido sem itens.");
 		}
 
-		return items.stream().map(dto -> {
+		return listaItens.stream().map(dto -> {
 			Integer idProduto = dto.getProduto();
 			Produto produto = produtoRepo.findById(idProduto)
 					.orElseThrow(() -> new RegraNegocioException("Código de produto inválido: "));
