@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,20 +17,22 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dosreis.domain.entity.Produto;
+import com.dosreis.rest.dto.MascaraProdutoDTO;
 import com.dosreis.service.ProdutoService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/produto")
+@CrossOrigin(origins = "*")
 public class ProdutoController {
 
 	@Autowired
 	private ProdutoService produtoServ;
 	
-	@PostMapping
+	@PostMapping(value = "/cadastrar")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public ResponseEntity<Produto> salvar(@Valid @RequestBody Produto produto){
+	public ResponseEntity<Produto> salvar(@Valid @RequestBody MascaraProdutoDTO produto){
 		return ResponseEntity.ok().body(produtoServ.salvar(produto));
 	}
 	

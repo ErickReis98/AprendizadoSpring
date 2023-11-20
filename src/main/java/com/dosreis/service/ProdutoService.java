@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.dosreis.domain.entity.Produto;
 import com.dosreis.domain.repository.ProdutoRepository;
+import com.dosreis.rest.dto.MascaraProdutoDTO;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoService {
@@ -14,42 +17,54 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository produtoRepo;
 	
-	public Produto salvar(Produto produto) {
-		return produtoRepo.save(produto);
+	@Transactional
+	public Produto salvar(MascaraProdutoDTO produto) {
+		String precoStr = produto.preco();
+		precoStr = precoStr.replace(".", "");
+		precoStr = precoStr.replace("R$", "");
+		precoStr = precoStr.replace(",", ".");
+		precoStr = precoStr.substring(1);
+		double preco = Double.parseDouble(precoStr);
+		Produto p = new Produto();
+		p.setNomeProduto(produto.nomeProduto());
+		p.setPreco(preco);
+		p.setEstoque(produto.estoque());
+		
+ 		return produtoRepo.save(p);
 	}
 	
+	@Transactional
 	public List<Produto> listarTodos(){
 		return produtoRepo.findAll();
 	}
 	
+	@Transactional
 	public Object buscaPorId(Integer id) {
 		verificaId(id);
 		return produtoRepo.findById(id);
 	}
 
+	@Transactional
 	public void deletar(Integer id) {
 		verificaId(id);
 		produtoRepo.deleteById(id);
 	}
 	
+	@Transactional
 	public Produto alterar(Produto produto, Integer id) {
 		verificaId(id);
-		Produto p = produtoRepo.getReferenceById(id);
-		alterarProduto(p, produto);
-		return produto = produtoRepo.save(p);
+		produto.setId(id);
+		return produtoRepo.save(produto);
 	}
 	
+	@Transactional
 	public void verificaId(Integer id) {
 		if(!produtoRepo.existsById(id)) {
 			System.out.println("Produto inexistente.");
 		}
 	}
 	
-	public void alterarProduto(Produto p, Produto produto) {
-		p.setNomeProduto(produto.getNomeProduto());
-		p.setPreco(produto.getPreco());
-	}
-	
+	@Transactional
 	public List<Produto> buscaPorFaixaPreco(Double a, Double b){
 		return produtoRepo.buscaPorFaixaPreco(a, b);
 	}

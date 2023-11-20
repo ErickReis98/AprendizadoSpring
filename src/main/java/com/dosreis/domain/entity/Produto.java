@@ -14,8 +14,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -34,22 +37,23 @@ public class Produto {
 	@NotNull(message = "{campo.preco.obrigatorio}")
 	private Double preco;
 
+	@Column
+	@NotNull
+	private int estoque;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "idProduto")
 	private List<ItemPedido> items;
 
-	public Produto() {
-		super();
-	}
-
-	public Produto(Integer id, String descricao, Double preco) {
+	public Produto(Integer id, @NotBlank(message = "{campo.nomeProduto.obrigatorio}") String nomeProduto,
+			@NotNull(message = "{campo.preco.obrigatorio}") Double preco, @NotBlank Integer estoque) {
 		super();
 		this.id = id;
-		this.nomeProduto = descricao;
+		this.nomeProduto = nomeProduto;
 		this.preco = preco;
+		this.estoque = estoque;
 	}
-
-
+	
 	
 
 }

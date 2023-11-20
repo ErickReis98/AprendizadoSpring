@@ -18,6 +18,10 @@ public class ClienteService {
 	private ClienteRepository clienteRepo;
 
 	public Cliente salvar(Cliente cliente) {
+		String cpf = cliente.getCpf();
+		cpf = cpf.replace(".", "");
+		cpf = cpf.replace("-", "");
+		cliente.setCpf(cpf);
 		return clienteRepo.save(cliente);
 	}
 
